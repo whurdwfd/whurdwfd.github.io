@@ -1,0 +1,29 @@
+---
+layout: page
+title: Books
+permalink: /books/
+---
+
+<script type="text/javascript">$(document).ready(function() {
+    $('table').tablesort();
+});</script>
+
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Authors</th>
+        <th>Year Published</th>
+        <th>Read?</th>
+    </tr>
+    </thead>
+    {% assign books = site.data.library | sort: "read_when", "first" %}
+    {% for book in books %}
+    <tr>
+        <td>{{ book.title}}</td>
+        <td>{{ book.authors }}</td>
+        <td>{{ book.publishing_year  }}</td>
+        <td>{% if book.read == 1 and book.read_when %}{{ book.read_when | date: "%Y" }}{% elsif book.read == 1 %}yes{% else %}{% endif%}</td>
+    </tr>
+    {% endfor %}
+</table>
