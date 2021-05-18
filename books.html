@@ -4,6 +4,8 @@ title: Books
 permalink: /books/
 ---
 
+A place to crack books that I've
+
 <script type="text/javascript">$(document).ready(function() {
     $('table').tablesort();
 });</script>
@@ -14,7 +16,7 @@ permalink: /books/
         <th>Title</th>
         <th>Authors</th>
         <th>Year Published</th>
-        <th>Read?</th>
+        <th>Read</th>
     </tr>
     </thead>
     {% assign books = site.data.library | sort: "read_when", "first" %}
@@ -23,7 +25,12 @@ permalink: /books/
         <td>{{ book.title}}</td>
         <td>{{ book.authors }}</td>
         <td>{{ book.publishing_year  }}</td>
-        <td>{% if book.read == 1 and book.read_when %}{{ book.read_when | date: "%Y" }}{% elsif book.read == 1 %}yes{% else %}{% endif%}</td>
+        <td><ul>
+            {% for date in book.read_when %}
+            <li>{{ date | date: "%Y-%m-%d" }}</li>
+            {% endfor %}
+        </ul></td>
+
     </tr>
     {% endfor %}
 </table>
